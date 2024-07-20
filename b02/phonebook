@@ -1,0 +1,52 @@
+#!/bin/bash
+
+PHONEBOOK_ENTRIES="bash_phonebook_entries"
+ILLEGAL="illegal input"
+
+if [ "$#" -lt 1 ]; then
+    echo $ILLEGAL
+    exit 1
+
+elif [ "$1" = "new" ]; then
+    # YOUR CODE HERE #
+    if [ "$#" -ne 3 ]; then
+        echo $ILLEGAL
+        exit 1
+    fi
+
+    echo "$2" "$3" >> $PHONEBOOK_ENTRIES 
+    echo "saved successfully!"
+
+elif [ "$1" = "list" ]; then
+    if [ ! -e $PHONEBOOK_ENTRIES ] || [ ! -s $PHONEBOOK_ENTRIES ]; then
+        echo "phonebook is empty"
+    else
+        # YOUR CODE HERE #
+        cat $PHONEBOOK_ENTRIES
+    fi
+
+elif [ "$1" = "lookup" ]; then
+    # YOUR CODE HERE #
+    grep "$2" $PHONEBOOK_ENTRIES
+
+elif [ "$1" = "remove" ]; then
+    # YOUR CODE HERE #
+    # failed to filter the filename
+    # line_number_old=$(wc -l $PHONEBOOK_ENTRIES 2> /dev/null)
+    line_number_old=$(cat $PHONEBOOK_ENTRIES | wc -l)
+    # echo $line_number_old 
+    sed -i "/${2}/d" $PHONEBOOK_ENTRIES 
+    # line_number_new=$(wc -l $PHONEBOOK_ENTRIES 2> /dev/null)
+    line_number_new=$(cat $PHONEBOOK_ENTRIES | wc -l)
+    let number=line_number_old-line_number_old
+    echo "removed ${number} lines successfully"
+
+elif [ "$1" = "clear" ]; then
+    # YOUR CODE HERE #
+    rm $PHONEBOOK_ENTRIES
+    echo "phonebook removed"
+
+else
+     # YOUR CODE HERE #
+     echo $ILLEGAL
+fi
