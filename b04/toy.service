@@ -1,0 +1,11 @@
+[Unit]
+Description=My Little Brother is a silly boy
+
+[Service]
+ExecStart=/home/ff/Desktop/Codes/SD/b04/run
+User=ff
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
