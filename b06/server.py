@@ -7,6 +7,7 @@ from tornado.web import Application, RequestHandler
 class MainHandler(RequestHandler):
     def get(self):
         self.write('Hello, I am ID {}\n'.format(task_id()))
+        self.set_status(200)
 
 class CrashHandler(RequestHandler):
     def get(self):
